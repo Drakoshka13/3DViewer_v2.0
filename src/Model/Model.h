@@ -1,18 +1,30 @@
 #ifndef CPP4_3DVIEWER_V2_0_2_MODEL_H_
 #define CPP4_3DVIEWER_V2_0_2_MODEL_H_
 
-#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
 
-#include "struct.h"
+enum Action { kRotX, kRotY, kRotZ, kMoveX, kMoveY, kMoveZ, kScaleP, kScaleM };
+
+enum Coord { kX, kY, kZ };
+
+struct Data {
+  double far;
+  double near;
+  int v_count;
+  int e_count;
+  double max_coord;
+  std::vector<int> facets;
+  std::vector<double> vertexes;
+};
 
 namespace s21 {
 class Parser {
  public:
-  Parser(Data &data);
+  Parser(){};
+  Parser(Data *data);
   ~Parser() = default;
 
   void Clear() noexcept;
@@ -25,7 +37,7 @@ class Parser {
   void DelSpace(std::string &line) const;
 
  private:
-  Data &data_;
+  Data *data_;
 };
 }  // namespace s21
 
