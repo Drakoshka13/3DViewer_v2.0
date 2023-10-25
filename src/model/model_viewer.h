@@ -1,6 +1,7 @@
 #ifndef CPP4_3DVIEWER_V2_0_2_MODEL_H_
 #define CPP4_3DVIEWER_V2_0_2_MODEL_H_
 
+
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -9,11 +10,12 @@
 namespace s21 {
 
 struct Data {
-  int f_count{};
   int v_count{};
+  int f_count{};
   double max_coord{};
-  std::vector<int> facets{};
-  std::vector<double> vertexes{};
+  double max_min_xyz[3][2]{};
+  std::vector<float> vertexes{};
+  std::vector<unsigned int> facets{};
 };
 
 class ModelViewer {
@@ -23,6 +25,7 @@ class ModelViewer {
   void Parser(const std::string &path);
   Data &GetData() { return data_; }
 
+
  private:
   Data data_;
   void ParserLine(const std::string &str, std::vector<std::string> &elements);
@@ -30,6 +33,7 @@ class ModelViewer {
   void PrintFacets();
   void PrintVertexes();
   void Clear() noexcept;
+  void MaxMin(Data &data_, const size_t &i);
 };
 }  // namespace s21
 

@@ -18,16 +18,13 @@ class MyOpenGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
  public:
   MyOpenGLWidget(QWidget *parent = nullptr);
   ~MyOpenGLWidget();
-
   void DataObj(Data data);
-
   bool isClicking, radio;
 
  private slots:
   void initializeGL() override;
   void resizeGL(int w, int h) override;
   void paintGL() override;
-
   void mousePressEvent(QMouseEvent *) override;
   void mouseReleaseEvent(QMouseEvent *) override;
   void mouseMoveEvent(QMouseEvent *) override;
@@ -36,6 +33,10 @@ class MyOpenGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   Data data_;
   float xRot, yRot, zRot;
   QPoint mPos, mDelta;
+  void PaintModel();
+  void ProjectionCenter();
+  void ProjectionParallel();
+
 };
 
 

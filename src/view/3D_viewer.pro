@@ -12,7 +12,7 @@ CONFIG += c++17
 
 SOURCES += \
     ../model/model_viewer.cc \
-    main.cpp \
+    main.cc \
     mainwindow.cpp \
     myopenglwidget.cpp
 
