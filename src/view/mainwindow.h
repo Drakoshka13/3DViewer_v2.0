@@ -32,7 +32,9 @@ class MainWindow : public QMainWindow {
 
   void on_size_l_valueChanged(double arg1);
 
-  private:
+  void on_exit_program_clicked();
+
+private:
   Ui::MainWindow *ui;
   ControllerViewer *controller_viewer_;
 };
