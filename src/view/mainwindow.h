@@ -18,10 +18,21 @@ class MainWindow : public QMainWindow {
   explicit MainWindow(ControllerViewer *controller_viewer, QWidget *parent = nullptr);
   ~MainWindow();
 
- private slots:
-  void on_pushButton_clicked();
+  private slots:
+  void on_open_file_clicked();
+  void on_parallel_radio_toggled();
+  void on_central_radio_toggled();
+  void on_line_toggled();
+  void on_disable_line_toggled();
+  void on_dash_line_toggled();
+  void on_square_toggled();
+  void on_circle_toggled();
+  void on_vertex_disable_toggled();
+  void on_size_p_valueChanged(double arg1);
 
- private:
+  void on_size_l_valueChanged(double arg1);
+
+  private:
   Ui::MainWindow *ui;
   ControllerViewer *controller_viewer_;
 };

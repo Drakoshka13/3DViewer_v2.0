@@ -96,6 +96,10 @@ namespace s21 {
         data_.v_count = 0;
         data_.f_count = 0;
         data_.max_coord = 0.0;
+        for(int i = 0; i < 3; i++){
+            data_.max_min_xyz[i][0] = 0;
+            data_.max_min_xyz[i][1] = 0;
+        }
         data_.facets.clear();
         data_.vertexes.clear();
     }
