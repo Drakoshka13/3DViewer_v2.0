@@ -6,21 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1853</width>
-    <height>1164</height>
+    <width>1450</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="MyOpenGLWidget" name="openGLWidget">
+   <widget class="s21::MyOpenGLWidget" name="openGLWidget">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>0</y>
-      <width>1341</width>
-      <height>1101</height>
+      <x>560</x>
+      <y>40</y>
+      <width>850</width>
+      <height>750</height>
      </rect>
     </property>
    </widget>
@@ -29,15 +29,15 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>471</width>
+      <width>521</width>
       <height>763</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout_18">
      <item>
       <layout class="QGridLayout" name="gridLayout_7">
-       <item row="2" column="0">
-        <widget class="QRadioButton" name="radioButton">
+       <item row="2" column="1">
+        <widget class="QRadioButton" name="central_radio">
          <property name="styleSheet">
           <string notr="true">QRadioButton {
 	border: 2px solid blue;
@@ -51,42 +51,13 @@
          <property name="text">
           <string>Центральная проекция</string>
          </property>
-         <property name="checkable">
-          <bool>true</bool>
-         </property>
-         <property name="checked">
-          <bool>true</bool>
-         </property>
-         <property name="autoRepeat">
-          <bool>false</bool>
-         </property>
-         <property name="autoExclusive">
-          <bool>false</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="QRadioButton" name="radioButton_2">
-         <property name="styleSheet">
-          <string notr="true">QRadioButton {
-	border: 2px solid blue;
-    border-radius: 4px;
-    border-style: outset;
-    border-width: 2px;
-    font: bold 14px;
-    padding: 6px;
-}</string>
-         </property>
-         <property name="text">
-          <string>паралельная проекция</string>
-         </property>
          <property name="autoExclusive">
           <bool>false</bool>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QLabel" name="Name">
+        <widget class="QLabel" name="name_file">
          <property name="styleSheet">
           <string notr="true">QLabel {
 	border: 2px solid blue;
@@ -113,7 +84,7 @@
         </widget>
        </item>
        <item row="0" column="0">
-        <widget class="QPushButton" name="Open_file">
+        <widget class="QPushButton" name="open_file">
          <property name="styleSheet">
           <string notr="true">QPushBotton {
     border: 1px solid gray;
@@ -128,7 +99,7 @@
         </widget>
        </item>
        <item row="1" column="0">
-        <widget class="QLabel" name="filename">
+        <widget class="QLabel" name="path_file">
          <property name="styleSheet">
           <string notr="true">QLabel {
 	border: 2px solid blue;
@@ -141,6 +112,35 @@
          </property>
          <property name="text">
           <string>File_path</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QRadioButton" name="parallel_radio">
+         <property name="styleSheet">
+          <string notr="true">QRadioButton {
+	border: 2px solid blue;
+    border-radius: 4px;
+    border-style: outset;
+    border-width: 2px;
+    font: bold 14px;
+    padding: 6px;
+}</string>
+         </property>
+         <property name="text">
+          <string>Паралельная проекция</string>
+         </property>
+         <property name="checkable">
+          <bool>true</bool>
+         </property>
+         <property name="checked">
+          <bool>true</bool>
+         </property>
+         <property name="autoRepeat">
+          <bool>false</bool>
+         </property>
+         <property name="autoExclusive">
+          <bool>false</bool>
          </property>
         </widget>
        </item>
@@ -794,7 +794,7 @@
      <item>
       <layout class="QGridLayout" name="gridLayout_5">
        <item row="1" column="0">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_8">
+        <widget class="QDoubleSpinBox" name="size_l">
          <property name="minimum">
           <double>0.000000000000000</double>
          </property>
@@ -804,10 +804,16 @@
          <property name="singleStep">
           <double>0.500000000000000</double>
          </property>
+         <property name="value">
+          <double>1.000000000000000</double>
+         </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QDoubleSpinBox" name="doubleSpinBox_9">
+        <widget class="QDoubleSpinBox" name="size_p">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
          <property name="minimum">
           <double>0.000000000000000</double>
          </property>
@@ -816,6 +822,9 @@
          </property>
          <property name="singleStep">
           <double>0.500000000000000</double>
+         </property>
+         <property name="value">
+          <double>1.000000000000000</double>
          </property>
         </widget>
        </item>
@@ -872,8 +881,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>820</y>
+      <x>40</x>
+      <y>800</y>
       <width>100</width>
       <height>32</height>
      </rect>
@@ -885,8 +894,8 @@
    <widget class="QPushButton" name="pB_GIF">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>830</y>
+      <x>160</x>
+      <y>800</y>
       <width>114</width>
       <height>32</height>
      </rect>
@@ -901,15 +910,15 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1853</width>
-     <height>24</height>
+     <width>1450</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
  </widget>
  <customwidgets>
   <customwidget>
-   <class>MyOpenGLWidget</class>
+   <class>s21::MyOpenGLWidget</class>
    <extends>QOpenGLWidget</extends>
    <header location="global">myopenglwidget.h</header>
   </customwidget>
