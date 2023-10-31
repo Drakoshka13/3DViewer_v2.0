@@ -1,11 +1,12 @@
 #ifndef CPP4_3DVIEWER_V2_0_2_MODEL_H_
 #define CPP4_3DVIEWER_V2_0_2_MODEL_H_
 
-
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include "lib/s21_matrix_oop.h"
 
 namespace s21 {
 
@@ -25,8 +26,8 @@ class ModelViewer {
   void Parser(const std::string &path);
   Data &GetData() { return data_; }
 
-    void PrintFacets();
-    void PrintVertexes();
+  void PrintFacets();
+  void PrintVertexes();
 
  private:
   Data data_;
