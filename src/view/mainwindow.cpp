@@ -18,16 +18,16 @@ void MainWindow::on_open_file_clicked() {
   QString fileDialog = QFileDialog::getOpenFileName(
       this, "Выберите файл", QCoreApplication::applicationDirPath(),
       "Файлы OBJ (*.obj)");
-  controller_viewer_->Parser(fileDialog.toStdString());
-  ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
   if (fileDialog != "") {
+    controller_viewer_->Parser(fileDialog.toStdString());
+    ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
     ui->name_file->setText(QFileInfo(fileDialog).fileName());
     ui->path_file->setText(QFileInfo(fileDialog).filePath());
+    ui->num_of_vertices->setText(
+        QString::number(controller_viewer_->GetData().v_count));
+    ui->num_of_facets->setText(
+        QString::number(controller_viewer_->GetData().f_count));
   }
-  ui->num_of_vertices->setText(
-      QString::number(controller_viewer_->GetData().v_count));
-  ui->num_of_facets->setText(
-      QString::number(controller_viewer_->GetData().f_count));
 }
 
 void MainWindow::on_parallel_radio_toggled() {
@@ -127,13 +127,57 @@ void MainWindow::on_size_l_valueChanged(double arg1) {
   ui->openGLWidget->SetObj().size_l = arg1;
 }
 
-void MainWindow::on_exit_program_clicked() { QApplication::quit(); }
+void MainWindow::on_save_clicked() {
+  QSettings settings("s21", "3D_viewer");
+  settings.setValue("parallel", ui->openGLWidget->GetObj().parallel);
+  settings.setValue("central", ui->openGLWidget->GetObj().central);
+  settings.setValue("dash", ui->openGLWidget->GetObj().dash);
+  settings.setValue("disable_line", ui->openGLWidget->GetObj().disable_line);
+  settings.setValue("disable_p", ui->openGLWidget->GetObj().disable_p);
+  settings.setValue("circle", ui->openGLWidget->GetObj().circle);
+  settings.setValue("size_l", ui->openGLWidget->GetObj().size_l);
+  settings.setValue("size_p", ui->openGLWidget->GetObj().size_p);
+}
 
+void MainWindow::on_load_clicked() {
+  QSettings settings("s21", "3D_viewer");
 
-//void MainWindow::on_color_lines_clicked() {
-//    QColor color = QColorDialog::getColor(Qt::white, this, "Select Color");
-//     if (color.isValid()) ui->openGLWidget->color(color);
+  ui->openGLWidget->SetObj().parallel =
+      settings.value("parallel", true).toBool();
+  ui->openGLWidget->SetObj().central =
+      settings.value("central", false).toBool();
+  if (ui->openGLWidget->GetObj().parallel == true) {
+    ui->parallel_radio->setChecked(true);
+  } else {
+    ui->central_radio->setChecked(true);
+  }
 
-//}
+  ui->openGLWidget->SetObj().dash = settings.value("dash", false).toBool();
+  ui->openGLWidget->SetObj().disable_line =
+      settings.value("disable_line", false).toBool();
+  if (ui->openGLWidget->GetObj().dash == true) {
+    ui->dash_line->setChecked(true);
+  } else if (ui->openGLWidget->GetObj().disable_line == true) {
+    ui->disable_line->setChecked(true);
+  } else {
+    ui->line->setChecked(true);
+  }
+
+  ui->openGLWidget->SetObj().circle = settings.value("circle", false).toBool();
+  ui->openGLWidget->SetObj().disable_p =
+      settings.value("disable_p", false).toBool();
+  if (ui->openGLWidget->GetObj().circle == true) {
+    ui->circle->setChecked(true);
+  } else if (ui->openGLWidget->GetObj().disable_p == true) {
+    ui->vertex_disable->setChecked(true);
+  } else {
+    ui->square->setChecked(true);
+  }
+
+  ui->openGLWidget->SetObj().size_l = settings.value("size_l", 0.0).toDouble();
+  ui->size_l->setValue(ui->openGLWidget->GetObj().size_l);
+  ui->openGLWidget->SetObj().size_p = settings.value("size_p", 0.0).toDouble();
+  ui->size_p->setValue(ui->openGLWidget->GetObj().size_p);
+}
 
 }  // namespace s21

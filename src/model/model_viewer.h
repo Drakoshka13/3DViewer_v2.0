@@ -25,13 +25,13 @@ class ModelViewer {
   void Parser(const std::string &path);
   Data &GetData() { return data_; }
 
+    void PrintFacets();
+    void PrintVertexes();
 
  private:
   Data data_;
   void ParserLine(const std::string &str, std::vector<std::string> &elements);
   void PushFacets(std::vector<std::string> &elements);
-  void PrintFacets();
-  void PrintVertexes();
   void Clear() noexcept;
   void MaxMin(Data &data_, const size_t &i);
 };

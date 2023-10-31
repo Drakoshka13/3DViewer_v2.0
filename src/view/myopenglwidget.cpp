@@ -1,4 +1,3 @@
-#define GL_SILENCE_DEPRECATION
 #include "myopenglwidget.h"
 
 namespace s21 {
@@ -40,23 +39,19 @@ void MyOpenGLWidget::PaintObj() {
     } else {
       glDisable(GL_LINE_STIPPLE);
     }
-
     if (obj.circle == true) {
       glEnable(GL_POINT_SMOOTH);
     } else {
       glDisable(GL_POINT_SMOOTH);
     }
-
     glLineWidth(obj.size_l);
     glPointSize(obj.size_p);
-
     glVertexPointer(3, GL_FLOAT, 0, &obj.data.vertexes[0]);
     glEnableClientState(GL_VERTEX_ARRAY);
     if (obj.disable_line == false) {
       glDrawElements(GL_LINES, obj.data.f_count, GL_UNSIGNED_INT,
                      &obj.data.facets[0]);
     }
-
     if (obj.disable_p == false) {
       glDrawArrays(GL_POINTS, 0, obj.data.v_count / 3);
     }
@@ -81,9 +76,9 @@ void MyOpenGLWidget::ProjectionCenter() {
   glTranslatef(0, 0, -heapHeight * 3);
 }
 
-void MyOpenGLWidget::mousePressEvent(QMouseEvent* mo) { mPos = mo->pos(); }
+void MyOpenGLWidget::mousePressEvent(QMouseEvent* mo) { isClicking = true; }
 
-//void MyOpenGLWidget::mouseReleaseEvent(QMouseEvent* mo) { isClicking = false; }
+void MyOpenGLWidget::mouseReleaseEvent(QMouseEvent* mo) { isClicking = false; }
 
 void MyOpenGLWidget::mouseMoveEvent(QMouseEvent* mo) {
   mDelta = mo->pos() - mPos;
