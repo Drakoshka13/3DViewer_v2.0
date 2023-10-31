@@ -1,6 +1,10 @@
 QT       += core gui openglwidgets opengl
 
+<<<<<<< HEAD:src/view/3D_viewer.pro
 LIBS += -lopengl32 -lglu32 -lgdi32
+=======
+#LIBS += -lopengl32 -lglu32 -lgdi32
+>>>>>>> mamiemal:src/View/3D_viewer.pro
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
