@@ -19,7 +19,6 @@ void ModelViewer::Parser(const std::string &path) {
     data_.v_count = data_.vertexes.size();
   }
   file.close();
-  //   DoMatrix();
 }
 
 void ModelViewer::PushFacets(std::vector<std::string> &elements) {
@@ -145,14 +144,6 @@ void ModelViewer::RotationByOZ(double angle) {
     double y_0 = data_.vertexes[i + 1];
     data_.vertexes[i] = std::cos(angle) * x_0 - std::sin(angle) * y_0;
     data_.vertexes[i + 1] = std::sin(angle) * x_0 + std::cos(angle) * y_0;
-  }
-}
-
-void ModelViewer::FromMatrix() {
-  for (int i = 0; i < matrix_.GetRows(); i++) {
-    for (int j = 0; j < matrix_.GetCols(); j++) {
-      data_.vertexes[i * 3 + j] = matrix_(i, j);
-    }
   }
 }
 
