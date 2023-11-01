@@ -137,6 +137,9 @@ void MainWindow::on_save_clicked() {
   settings.setValue("circle", ui->openGLWidget->GetObj().circle);
   settings.setValue("size_l", ui->openGLWidget->GetObj().size_l);
   settings.setValue("size_p", ui->openGLWidget->GetObj().size_p);
+  settings.setValue("main_color", ui->openGLWidget->GetObj().main_color_);
+  settings.setValue("line_color", ui->openGLWidget->GetObj().line_color_);
+  settings.setValue("vertex_color", ui->openGLWidget->GetObj().vertex_color_);
 }
 
 void MainWindow::on_load_clicked() {
@@ -177,11 +180,14 @@ void MainWindow::on_load_clicked() {
   ui->size_l->setValue(ui->openGLWidget->GetObj().size_l);
   ui->openGLWidget->SetObj().size_p = settings.value("size_p", 0.0).toDouble();
   ui->size_p->setValue(ui->openGLWidget->GetObj().size_p);
+
+  ui->openGLWidget->SetObj().main_color_ =
+      settings.value("main_color", QColor(50, 50, 50, 0)).value<QColor>();
+  ui->openGLWidget->SetObj().line_color_ =
+      settings.value("line_color", QColor(255, 0, 0, 0)).value<QColor>();
+  ui->openGLWidget->SetObj().vertex_color_ =
+      settings.value("vertex_color", QColor(255, 0, 0, 0)).value<QColor>();
 }
-
-
-
-
 
 void MainWindow::on_SpinBox_Scale_valueChanged(double arg1) {
   ui->SpinBox_Scale->setMinimum(0.1);
@@ -214,9 +220,9 @@ void MainWindow::on_SpinBox_moveZ_valueChanged(double arg1) {
 }
 
 void MainWindow::on_SpinBox_X_rot_valueChanged(int arg1) {
-    ui->SpinBox_X_rot->setValue((360 + (arg1%360))%360);
-    controller_viewer_->RotateOX(arg1 - ui->openGLWidget->num_last_x_rot);
-    ui->openGLWidget->num_last_x_rot = arg1;
+  ui->SpinBox_X_rot->setValue((360 + (arg1 % 360)) % 360);
+  controller_viewer_->RotateOX(arg1 - ui->openGLWidget->num_last_x_rot);
+  ui->openGLWidget->num_last_x_rot = arg1;
   QObject::connect(ui->SpinBox_X_rot, SIGNAL(valueChanged(int)), ui->dial_X_rot,
                    SLOT(setValue(int)));
   ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
@@ -230,9 +236,9 @@ void MainWindow::on_dial_X_rot_valueChanged(int value) {
 }
 
 void MainWindow::on_SpinBox_Y_rot_valueChanged(int arg1) {
-    ui->SpinBox_Y_rot->setValue((360 + (arg1%360))%360);
-    controller_viewer_->RotateOY(arg1 - ui->openGLWidget->num_last_y_rot);
-    ui->openGLWidget->num_last_y_rot = arg1;
+  ui->SpinBox_Y_rot->setValue((360 + (arg1 % 360)) % 360);
+  controller_viewer_->RotateOY(arg1 - ui->openGLWidget->num_last_y_rot);
+  ui->openGLWidget->num_last_y_rot = arg1;
   QObject::connect(ui->SpinBox_Y_rot, SIGNAL(valueChanged(int)), ui->dial_Y_rot,
                    SLOT(setValue(int)));
   ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
@@ -246,9 +252,9 @@ void MainWindow::on_dial_Y_rot_valueChanged(int value) {
 }
 
 void MainWindow::on_SpinBox_Z_rot_valueChanged(int arg1) {
-    ui->SpinBox_Z_rot->setValue((360 + (arg1%360))%360);
-    controller_viewer_->RotateOZ(arg1 - ui->openGLWidget->num_last_z_rot);
-    ui->openGLWidget->num_last_z_rot = arg1;
+  ui->SpinBox_Z_rot->setValue((360 + (arg1 % 360)) % 360);
+  controller_viewer_->RotateOZ(arg1 - ui->openGLWidget->num_last_z_rot);
+  ui->openGLWidget->num_last_z_rot = arg1;
   QObject::connect(ui->SpinBox_Z_rot, SIGNAL(valueChanged(int)), ui->dial_Z_rot,
                    SLOT(setValue(int)));
   ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
@@ -288,7 +294,5 @@ void MainWindow::on_pushButton_clicked() {
   QImage img = ui->openGLWidget->GetFrame();
   img.save(f_name);
 }
-
-
 
 }  // namespace s21

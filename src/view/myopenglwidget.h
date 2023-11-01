@@ -4,6 +4,7 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 
+#include <QColorDialog>
 #include <QCoreApplication>
 #include <QDebug>
 #include <QFileDialog>
@@ -12,8 +13,6 @@
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
 #include <QSettings>
-
-#include <QColorDialog>
 
 #include "../controller/controller_viewer.h"
 
@@ -33,6 +32,7 @@ class MyOpenGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
     bool circle{0};
     double size_l{1};
     double size_p{1};
+    QColor main_color_, line_color_, vertex_color_;
   };
   Setting &SetObj() { return obj; }
   Setting GetObj() { return obj; }
@@ -44,13 +44,11 @@ class MyOpenGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   void set_main_color(const QColor &color) noexcept;
   QImage GetFrame() noexcept;
 
-
   double num_last_scale = 1.0;
   double num_last_x_move = 0.0, num_last_y_move = 0.0, num_last_z_move = 0.0;
   double num_last_x_rot = 0.0, num_last_y_rot = 0.0, num_last_z_rot = 0.0;
 
   double xRot, yRot, zRot;
-
 
  private slots:
   void initializeGL() override;
@@ -67,8 +65,6 @@ class MyOpenGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   void PaintObj();
   void ProjectionCenter();
   void ProjectionParallel();
-
-  QColor main_color_, line_color_, vertex_color_;
 };
 
 }  // namespace s21

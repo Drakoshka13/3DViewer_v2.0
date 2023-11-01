@@ -51,7 +51,6 @@ class MainWindow : public QMainWindow {
   void on_color_background_clicked();
   void on_pushButton_clicked();
 
-
  private:
   Ui::MainWindow *ui;
   ControllerViewer *controller_viewer_;

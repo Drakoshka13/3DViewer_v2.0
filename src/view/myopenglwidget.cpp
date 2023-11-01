@@ -3,9 +3,9 @@
 namespace s21 {
 
 MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent) {
-    main_color_ = Qt::black;
-    line_color_ = Qt::white;
-    vertex_color_ = Qt::white;
+  obj.main_color_ = Qt::black;
+  obj.line_color_ = Qt::white;
+  obj.vertex_color_ = Qt::white;
 }
 
 MyOpenGLWidget::~MyOpenGLWidget() {}
@@ -18,8 +18,9 @@ void MyOpenGLWidget::initializeGL() {
 void MyOpenGLWidget::resizeGL(int w, int h) { glViewport(0, 0, w, h); }
 
 void MyOpenGLWidget::paintGL() {
+  glClearColor(obj.main_color_.redF(), obj.main_color_.greenF(),
+               obj.main_color_.blueF(), obj.main_color_.alphaF());
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-  glClearColor(0, 0, 0, 0);
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
   if (obj.parallel == true) {
@@ -51,11 +52,19 @@ void MyOpenGLWidget::PaintObj() {
     glLineWidth(obj.size_l);
     glPointSize(obj.size_p);
     glVertexPointer(3, GL_FLOAT, 0, &obj.data.vertexes[0]);
+
+    glColor3d(obj.line_color_.redF(), obj.line_color_.greenF(),
+              obj.line_color_.blueF());
+
     glEnableClientState(GL_VERTEX_ARRAY);
     if (obj.disable_line == false) {
       glDrawElements(GL_LINES, obj.data.f_count, GL_UNSIGNED_INT,
                      &obj.data.facets[0]);
     }
+
+    glColor3d(obj.vertex_color_.redF(), obj.vertex_color_.greenF(),
+              obj.vertex_color_.blueF());
+
     if (obj.disable_p == false) {
       glDrawArrays(GL_POINTS, 0, obj.data.v_count / 3);
     }
@@ -96,15 +105,15 @@ void MyOpenGLWidget::mouseMoveEvent(QMouseEvent* mo) {
 }
 
 void MyOpenGLWidget::set_line_color(const QColor& color) noexcept {
-  line_color_ = color;
+  obj.line_color_ = color;
 }
 
 void MyOpenGLWidget::set_vertex_color(const QColor& color) noexcept {
-  vertex_color_ = color;
+  obj.vertex_color_ = color;
 }
 
 void MyOpenGLWidget::set_main_color(const QColor& color) noexcept {
-  main_color_ = color;
+  obj.main_color_ = color;
 }
 
 QImage MyOpenGLWidget::GetFrame() noexcept { return grabFramebuffer(); }
