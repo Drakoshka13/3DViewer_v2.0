@@ -29,12 +29,24 @@ class ModelViewer {
   void PrintFacets();
   void PrintVertexes();
 
+  void DoMatrix();
+  void MoveX(double a);
+  void MoveY(double a);
+  void MoveZ(double a);
+  void RotationByOX(double angle);
+  void RotationByOY(double angle);
+  void RotationByOZ(double angle);
+  void Scale(double X, double Y, double Z);
+  void FromMatrix();
+
+
  private:
   Data data_;
   void ParserLine(const std::string &str, std::vector<std::string> &elements);
   void PushFacets(std::vector<std::string> &elements);
   void Clear() noexcept;
   void MaxMin(Data &data_, const size_t &i);
+  S21Matrix matrix_;
 };
 }  // namespace s21
 

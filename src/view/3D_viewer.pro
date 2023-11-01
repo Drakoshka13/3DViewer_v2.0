@@ -1,10 +1,9 @@
 QT       += core gui openglwidgets opengl
 
-<<<<<<< HEAD:src/view/3D_viewer.pro
-LIBS += -lopengl32 -lglu32 -lgdi32
-=======
+
+
 #LIBS += -lopengl32 -lglu32 -lgdi32
->>>>>>> mamiemal:src/View/3D_viewer.pro
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,6 +14,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ../model/lib/s21_matrix_oop.cc \
     ../model/model_viewer.cc \
     main.cc \
     mainwindow.cpp \
@@ -22,6 +22,7 @@ SOURCES += \
 
 HEADERS += \
     ../controller/controller_viewer.h \
+    ../model/lib/s21_matrix_oop.h \
     ../model/model_viewer.h \
     mainwindow.h \
     myopenglwidget.h

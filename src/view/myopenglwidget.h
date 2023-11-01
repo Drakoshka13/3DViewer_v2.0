@@ -1,8 +1,8 @@
 #ifndef MYOPENGLWIDGET_H
 #define MYOPENGLWIDGET_H
 
-#include <GL/gl.h>
-#include <GL/glu.h>
+//#include <GL/gl.h>
+//#include <GL/glu.h>
 
 #include <QCoreApplication>
 #include <QDebug>
@@ -37,6 +37,13 @@ class MyOpenGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   void SaveSetting();
   void LoadSetting();
 
+  double num_last_scale = 1.0;
+  double num_last_x_move = 0.0, num_last_y_move = 0.0, num_last_z_move = 0.0;
+  double num_last_x_rot = 0.0, num_last_y_rot = 0.0, num_last_z_rot = 0.0;
+
+  double xRot, yRot, zRot;
+
+
  private slots:
   void initializeGL() override;
   void resizeGL(int w, int h) override;
@@ -47,7 +54,7 @@ class MyOpenGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
 
  private:
   Setting obj;
-  float xRot, yRot, zRot;
+ // float xRot, yRot, zRot;
   QPoint mPos, mDelta;
   bool isClicking;
   void PaintObj();

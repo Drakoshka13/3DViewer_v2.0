@@ -1,5 +1,7 @@
 #include "model_viewer.h"
 
+
+
 namespace s21 {
 
 void ModelViewer::Parser(const std::string &path) {
@@ -19,6 +21,7 @@ void ModelViewer::Parser(const std::string &path) {
         data_.v_count = data_.vertexes.size();
     }
     file.close();
+    DoMatrix();
 }
 
 void ModelViewer::PushFacets(std::vector<std::string> &elements) {
@@ -99,3 +102,86 @@ void ModelViewer::Clear() noexcept {
 }
 
 }  // namespace s21
+
+using namespace s21;
+
+   void ModelViewer::DoMatrix() {
+        matrix_ = S21Matrix();
+        matrix_.SetRows(data_.v_count);
+        matrix_.SetCols(3);
+        //auto it = data_.vertexes.begin();
+        for (int i = 0; i <  matrix_.GetRows(); ++i) {
+        for (int j = 0; j <  matrix_.GetCols(); ++j) {
+            matrix_(i, j) = data_.vertexes[i * 3 + j];
+        }
+    }
+
+    }
+
+
+void ModelViewer::Scale(double X, double Y, double Z) {
+  for (int i = 0; i < matrix_.GetRows(); i++) {
+    matrix_(i, 0) *= X;
+    matrix_(i, 1) *= Y;
+    matrix_(i, 2) *= Z;
+  }
+  FromMatrix();
+}
+
+
+
+    void ModelViewer::MoveX(double a) {
+        for (int i = 0; i < matrix_.GetRows(); i++) matrix_(i, 0) += a;
+        FromMatrix();
+    }
+
+    void ModelViewer::MoveY(double a) {
+        for (int i = 0; i < matrix_.GetRows(); i++) matrix_(i, 1)  += a;
+        FromMatrix();
+    }
+
+    void ModelViewer::MoveZ(double a) {
+        for (int i = 0; i < matrix_.GetRows(); i++) matrix_(i, 2)  += a;
+        FromMatrix();
+    }
+
+
+
+    void ModelViewer::RotationByOX(double angle) {
+        for (int i = 0; i < matrix_.GetRows(); i++) {
+            double y_0 = matrix_(i, 1);
+            double z_0 =matrix_(i, 2);
+            matrix_(i, 1) = cos(angle) * y_0 - sin(angle) * z_0;
+            matrix_(i, 2) = sin(angle) * y_0 + cos(angle) * z_0;
+  }
+  FromMatrix();
+}
+
+void ModelViewer::RotationByOY(double angle) {
+  for (int i = 0; i < matrix_.GetRows(); i++) {
+    double x_0 = matrix_(i, 0);
+    double z_0 = matrix_(i, 2);
+    matrix_(i, 0) = sin(angle) * z_0 + cos(angle) * x_0;
+    matrix_(i, 2) = cos(angle) * z_0 - sin(angle) * x_0;
+  }
+}
+
+void ModelViewer::RotationByOZ(double angle) {
+  for (int i = 0; i < matrix_.GetRows(); i++) {
+    double x_0 = matrix_(i, 0);
+    double y_0 = matrix_(i, 1);
+    matrix_(i, 0) = cos(angle) * x_0 - sin(angle) * y_0;
+    matrix_(i, 1) = sin(angle) * x_0 + cos(angle) * y_0;
+  }
+}
+
+
+
+    void ModelViewer::FromMatrix() {
+        //auto it = data_.vertexes.begin();
+        for (int i = 0; i < matrix_.GetRows(); i++) {
+            for (int j = 0; j < matrix_.GetCols(); j++) {
+                data_.vertexes[i * 3 + j] = matrix_(i,j);
+            }
+        }
+    }
