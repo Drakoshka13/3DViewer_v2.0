@@ -2,7 +2,6 @@
 #define CPP4_3DVIEWER_V2_0_2_MODEL_H_
 
 #include <fstream>
-#include <iostream>
 #include <string>
 #include <vector>
 
@@ -25,11 +24,8 @@ class ModelViewer {
   ~ModelViewer() = default;
   void Parser(const std::string &path);
   Data &GetData() { return data_; }
-
   void PrintFacets();
   void PrintVertexes();
-
-  void DoMatrix();
   void MoveX(double a);
   void MoveY(double a);
   void MoveZ(double a);
@@ -39,14 +35,12 @@ class ModelViewer {
   void Scale(double X, double Y, double Z);
   void FromMatrix();
 
-
  private:
   Data data_;
   void ParserLine(const std::string &str, std::vector<std::string> &elements);
   void PushFacets(std::vector<std::string> &elements);
   void Clear() noexcept;
   void MaxMin(Data &data_, const size_t &i);
-  S21Matrix matrix_;
 };
 }  // namespace s21
 

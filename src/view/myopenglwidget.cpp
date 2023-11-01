@@ -2,7 +2,11 @@
 
 namespace s21 {
 
-MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent) {}
+MyOpenGLWidget::MyOpenGLWidget(QWidget* parent) : QOpenGLWidget(parent) {
+    main_color_ = Qt::black;
+    line_color_ = Qt::white;
+    vertex_color_ = Qt::white;
+}
 
 MyOpenGLWidget::~MyOpenGLWidget() {}
 

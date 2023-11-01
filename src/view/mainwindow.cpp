@@ -141,7 +141,6 @@ void MainWindow::on_save_clicked() {
 
 void MainWindow::on_load_clicked() {
   QSettings settings("s21", "3D_viewer");
-
   ui->openGLWidget->SetObj().parallel =
       settings.value("parallel", true).toBool();
   ui->openGLWidget->SetObj().central =
@@ -180,6 +179,10 @@ void MainWindow::on_load_clicked() {
   ui->size_p->setValue(ui->openGLWidget->GetObj().size_p);
 }
 
+
+
+
+
 void MainWindow::on_SpinBox_Scale_valueChanged(double arg1) {
   ui->SpinBox_Scale->setMinimum(0.1);
   double s = arg1 / ui->openGLWidget->num_last_scale;
@@ -212,7 +215,7 @@ void MainWindow::on_SpinBox_moveZ_valueChanged(double arg1) {
 
 void MainWindow::on_SpinBox_X_rot_valueChanged(int arg1) {
     ui->SpinBox_X_rot->setValue((360 + (arg1%360))%360);
-    controller_viewer_->RotateOX(arg1 - ui->openGLWidget->num_last_x_rot); 
+    controller_viewer_->RotateOX(arg1 - ui->openGLWidget->num_last_x_rot);
     ui->openGLWidget->num_last_x_rot = arg1;
   QObject::connect(ui->SpinBox_X_rot, SIGNAL(valueChanged(int)), ui->dial_X_rot,
                    SLOT(setValue(int)));
@@ -228,7 +231,7 @@ void MainWindow::on_dial_X_rot_valueChanged(int value) {
 
 void MainWindow::on_SpinBox_Y_rot_valueChanged(int arg1) {
     ui->SpinBox_Y_rot->setValue((360 + (arg1%360))%360);
-    controller_viewer_->RotateOY(arg1 - ui->openGLWidget->num_last_y_rot); 
+    controller_viewer_->RotateOY(arg1 - ui->openGLWidget->num_last_y_rot);
     ui->openGLWidget->num_last_y_rot = arg1;
   QObject::connect(ui->SpinBox_Y_rot, SIGNAL(valueChanged(int)), ui->dial_Y_rot,
                    SLOT(setValue(int)));
@@ -244,11 +247,11 @@ void MainWindow::on_dial_Y_rot_valueChanged(int value) {
 
 void MainWindow::on_SpinBox_Z_rot_valueChanged(int arg1) {
     ui->SpinBox_Z_rot->setValue((360 + (arg1%360))%360);
-    controller_viewer_->RotateOZ(arg1 - ui->openGLWidget->num_last_z_rot); 
+    controller_viewer_->RotateOZ(arg1 - ui->openGLWidget->num_last_z_rot);
     ui->openGLWidget->num_last_z_rot = arg1;
   QObject::connect(ui->SpinBox_Z_rot, SIGNAL(valueChanged(int)), ui->dial_Z_rot,
                    SLOT(setValue(int)));
-  ui->openGLWidget->SetObj().data = controller_viewer_->GetData();                 
+  ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
   ui->openGLWidget->update();
 }
 
@@ -258,7 +261,7 @@ void MainWindow::on_dial_Z_rot_valueChanged(int value) {
                    SLOT(setValue(int)));
 }
 
-oid MainWindow::on_exit_program_clicked() { QApplication::quit(); }
+void MainWindow::on_exit_program_clicked() { QApplication::quit(); }
 
 void MainWindow::on_color_point_clicked() {
   color_vertex_ = QColorDialog::getColor(Qt::white, this, "Choose Color");

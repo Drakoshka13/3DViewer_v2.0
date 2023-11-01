@@ -1,8 +1,8 @@
 #ifndef MYOPENGLWIDGET_H
 #define MYOPENGLWIDGET_H
 
-//#include <GL/gl.h>
-//#include <GL/glu.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
 
 #include <QCoreApplication>
 #include <QDebug>
@@ -12,6 +12,8 @@
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
 #include <QSettings>
+
+#include <QColorDialog>
 
 #include "../controller/controller_viewer.h"
 
@@ -36,6 +38,12 @@ class MyOpenGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
   Setting GetObj() { return obj; }
   void SaveSetting();
   void LoadSetting();
+
+  void set_line_color(const QColor &color) noexcept;
+  void set_vertex_color(const QColor &color) noexcept;
+  void set_main_color(const QColor &color) noexcept;
+  QImage GetFrame() noexcept;
+
 
   double num_last_scale = 1.0;
   double num_last_x_move = 0.0, num_last_y_move = 0.0, num_last_z_move = 0.0;

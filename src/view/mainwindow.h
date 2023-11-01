@@ -35,11 +35,9 @@ class MainWindow : public QMainWindow {
   void on_load_clicked();
 
   void on_SpinBox_Scale_valueChanged(double arg1);
-
   void on_SpinBox_moveX_valueChanged(double с);
   void on_SpinBox_moveY_valueChanged(double arg1);
   void on_SpinBox_moveZ_valueChanged(double arg1);
-
   void on_SpinBox_X_rot_valueChanged(int arg1);
   void on_dial_X_rot_valueChanged(int value);
   void on_SpinBox_Y_rot_valueChanged(int arg1);
