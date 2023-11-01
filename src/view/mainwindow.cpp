@@ -182,9 +182,6 @@ void MainWindow::on_load_clicked() {
 
 void MainWindow::on_SpinBox_Scale_valueChanged(double arg1) {
   ui->SpinBox_Scale->setMinimum(0.1);
-  // s21_scale(ui->openGLWidget->v, ui->openGLWidget->size_v,
-  //           arg1 / ui->openGLWidget->num_last_scale);
-  // ui->openGLWidget->num_last_scale = arg1;
   double s = arg1 / ui->openGLWidget->num_last_scale;
   controller_viewer_->ChangeScale(s, s, s);
   ui->openGLWidget->num_last_scale = arg1;
@@ -259,6 +256,34 @@ void MainWindow::on_dial_Z_rot_valueChanged(int value) {
   ui->openGLWidget->zRot = value;
   QObject::connect(ui->dial_Z_rot, SIGNAL(valueChanged(int)), ui->SpinBox_Z_rot,
                    SLOT(setValue(int)));
+}
+
+oid MainWindow::on_exit_program_clicked() { QApplication::quit(); }
+
+void MainWindow::on_color_point_clicked() {
+  color_vertex_ = QColorDialog::getColor(Qt::white, this, "Choose Color");
+  if (color_vertex_.isValid())
+    ui->openGLWidget->set_vertex_color(color_vertex_);
+  ui->openGLWidget->update();
+}
+
+void MainWindow::on_color_lines_clicked() {
+  color_line_ = QColorDialog::getColor(Qt::white, this, "Choose Color");
+  if (color_line_.isValid()) ui->openGLWidget->set_line_color(color_line_);
+  ui->openGLWidget->update();
+}
+
+void MainWindow::on_color_background_clicked() {
+  color_main_ = QColorDialog::getColor(Qt::white, this, "Choose Color");
+  if (color_main_.isValid()) ui->openGLWidget->set_main_color(color_main_);
+  ui->openGLWidget->update();
+}
+
+void MainWindow::on_pushButton_clicked() {
+  QString f_name = QFileDialog::getSaveFileName(
+      this, "Save screenshot", "", "BMP Image (*.bmp);; JPEG Image (*.jpeg)");
+  QImage img = ui->openGLWidget->GetFrame();
+  img.save(f_name);
 }
 
 

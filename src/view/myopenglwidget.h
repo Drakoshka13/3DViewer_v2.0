@@ -54,12 +54,13 @@ class MyOpenGLWidget : public QOpenGLWidget, public QOpenGLFunctions {
 
  private:
   Setting obj;
- // float xRot, yRot, zRot;
   QPoint mPos, mDelta;
   bool isClicking;
   void PaintObj();
   void ProjectionCenter();
   void ProjectionParallel();
+
+  QColor main_color_, line_color_, vertex_color_;
 };
 
 }  // namespace s21

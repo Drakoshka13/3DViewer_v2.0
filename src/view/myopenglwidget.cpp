@@ -91,4 +91,18 @@ void MyOpenGLWidget::mouseMoveEvent(QMouseEvent* mo) {
   mDelta = QPoint();
 }
 
+void MyOpenGLWidget::set_line_color(const QColor& color) noexcept {
+  line_color_ = color;
+}
+
+void MyOpenGLWidget::set_vertex_color(const QColor& color) noexcept {
+  vertex_color_ = color;
+}
+
+void MyOpenGLWidget::set_main_color(const QColor& color) noexcept {
+  main_color_ = color;
+}
+
+QImage MyOpenGLWidget::GetFrame() noexcept { return grabFramebuffer(); }
+
 }  // namespace s21

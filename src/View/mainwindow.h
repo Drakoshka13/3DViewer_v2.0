@@ -30,15 +30,12 @@ class MainWindow : public QMainWindow {
   void on_circle_toggled();
   void on_vertex_disable_toggled();
   void on_size_p_valueChanged(double arg1);
-
   void on_size_l_valueChanged(double arg1);
 
   void on_exit_program_clicked();
-
   void on_color_point_clicked();
   void on_color_lines_clicked();
   void on_color_background_clicked();
-
   void on_pushButton_clicked();
 
 private:
