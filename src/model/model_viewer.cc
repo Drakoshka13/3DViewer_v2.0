@@ -107,7 +107,8 @@ void ModelViewer::Scale(double X, double Y, double Z) {
 }
 
 void ModelViewer::MoveX(double a) {
-  for (size_t i = 0; i < data_.vertexes.size(); i += 3) data_.vertexes[i] += a;
+  for (size_t i = 0; i < data_.vertexes.size(); i += 3)
+      data_.vertexes[i] += a;
 }
 
 void ModelViewer::MoveY(double a) {

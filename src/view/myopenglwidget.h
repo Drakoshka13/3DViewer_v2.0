@@ -1,9 +1,11 @@
 #ifndef MYOPENGLWIDGET_H
 #define MYOPENGLWIDGET_H
+#define GL_SILENCE_DEPRECATION
 
-#include <GL/gl.h>
-#include <GL/glu.h>
+// #include <GL/gl.h>
+// #include <GL/glu.h>
 
+#include <QColor>
 #include <QColorDialog>
 #include <QCoreApplication>
 #include <QDebug>
@@ -12,9 +14,14 @@
 #include <QMouseEvent>
 #include <QOpenGLFunctions>
 #include <QOpenGLWidget>
+#include <QScreen>
 #include <QSettings>
+#include <QTimer>
+#include <QWidget>
+#include <memory>
 
 #include "../controller/controller_viewer.h"
+#include "qgifimage.h"
 
 namespace s21 {
 

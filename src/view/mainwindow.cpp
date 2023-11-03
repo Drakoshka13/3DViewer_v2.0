@@ -10,7 +10,11 @@ MainWindow::MainWindow(ControllerViewer *controller_viewer, QWidget *parent)
       controller_viewer_(controller_viewer) {
   ui->setupUi(this);
   setFixedSize(1450, 900);
+  timer_ = new QTimer(0);
+  connect(timer_, SIGNAL(timeout()), this, SLOT(SaveGIF()));
 }
+
+
 
 MainWindow::~MainWindow() { delete ui; }
 
@@ -293,6 +297,35 @@ void MainWindow::on_pushButton_clicked() {
       this, "Save screenshot", "", "BMP Image (*.bmp);; JPEG Image (*.jpeg)");
   QImage img = ui->openGLWidget->GetFrame();
   img.save(f_name);
+}
+
+void MainWindow::on_pB_GIF_clicked() {
+  gif_name_ =
+      QFileDialog::getSaveFileName(this, "Save GIF", "", "Gif Files (*.gif)");
+  if (gif_name_ != "") {
+    ui->pB_GIF->setText("▢");
+    ui->pB_GIF->setDisabled(true);
+    frame_ = new QGifImage;
+    frame_->setDefaultDelay(10);
+    timer_->setInterval(100);
+    connect(timer_, SIGNAL(timeout()), this, SLOT(SaveGIF()));
+    timer_->start();
+
+  }
+}
+
+void MainWindow::SaveGIF() {
+  QImage img = ui->openGLWidget->GetFrame();
+  frame_->addFrame(img);
+  if (frame_count_ == 50) {
+    timer_->stop();
+    frame_->save(gif_name_);
+    frame_count_ = 0;
+    delete frame_;
+    ui->pB_GIF->setEnabled(true);
+    ui->pB_GIF->setText("GIF ▶");
+  }
+  frame_count_++;
 }
 
 }  // namespace s21

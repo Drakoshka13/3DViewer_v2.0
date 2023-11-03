@@ -51,11 +51,20 @@ class MainWindow : public QMainWindow {
   void on_color_background_clicked();
   void on_pushButton_clicked();
 
- private:
+  void on_pB_GIF_clicked();
+  void SaveGIF();
+
+private:
   Ui::MainWindow *ui;
   ControllerViewer *controller_viewer_;
   void SaveSetting();
   QColor color_main_, color_line_, color_vertex_;
+
+  int frame_count_;
+  QTimer *timer_;
+  QGifImage *frame_;
+  QString gif_name_;
+
 };
 
 }  // namespace s21
