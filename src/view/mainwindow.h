@@ -54,7 +54,7 @@ class MainWindow : public QMainWindow {
   void on_pB_GIF_clicked();
   void SaveGIF();
 
-private:
+ private:
   Ui::MainWindow *ui;
   ControllerViewer *controller_viewer_;
   void SaveSetting();
@@ -64,7 +64,6 @@ private:
   QTimer *timer_;
   QGifImage *frame_;
   QString gif_name_;
-
 };
 
 }  // namespace s21

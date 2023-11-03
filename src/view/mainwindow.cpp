@@ -10,11 +10,9 @@ MainWindow::MainWindow(ControllerViewer *controller_viewer, QWidget *parent)
       controller_viewer_(controller_viewer) {
   ui->setupUi(this);
   setFixedSize(1450, 900);
-  timer_ = new QTimer(0);
-  connect(timer_, SIGNAL(timeout()), this, SLOT(SaveGIF()));
+  frame_count_ = 0;
+  timer_ = new QTimer(this);
 }
-
-
 
 MainWindow::~MainWindow() { delete ui; }
 
@@ -308,9 +306,9 @@ void MainWindow::on_pB_GIF_clicked() {
     frame_ = new QGifImage;
     frame_->setDefaultDelay(10);
     timer_->setInterval(100);
-    connect(timer_, SIGNAL(timeout()), this, SLOT(SaveGIF()));
     timer_->start();
-
+    SaveGIF();
+//    connect(timer_, SIGNAL(timeout()), this, SLOT(SaveGIF()));
   }
 }
 
@@ -322,10 +320,12 @@ void MainWindow::SaveGIF() {
     frame_->save(gif_name_);
     frame_count_ = 0;
     delete frame_;
+     delete timer_;
     ui->pB_GIF->setEnabled(true);
     ui->pB_GIF->setText("GIF ▶");
   }
   frame_count_++;
+
 }
 
 }  // namespace s21
