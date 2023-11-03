@@ -17,10 +17,10 @@ all: clean install
 install: uninstall
 	mkdir build
 	cp -rf View/* build
-	cd build && qmake SmartCalc.pro
+	cd build && qmake 3D_viewer.pro
 	make -C build
 	cd build && make clean
-	open ./build/SmartCalc.app/Contents/MacOS/SmartCalc
+	open ./build/3D_viewer.app/Contents/MacOS/3D_viewer
 
 uninstall:
 	rm -rf build
@@ -33,16 +33,16 @@ gcov_report:
 	$(CC) $(TEST_PATH) ./Model/Model.cc  $(LIBFLAGS) $(GCOV_FLAGS) -lcheck -o test
 	./test
 	gcov test
-	lcov --ignore-errors mismatch -t  "test" -c -d  ./  --no-external --output-file ./coverage.info
+	lcov --ignore-errors mismatch -t "test" -c -d  ./  --no-external --output-file ./coverage.info
 	genhtml coverage.info --output-directory ./report/
 	open ./report/index.html
 
 dvi:
 	open README_DVI.md
 
-dist: 
+dist:
 	mkdir archive
-	cp -r build/SmartCalc.app archive
+	cp -r build/3D_viewer.app archive
 	tar -cvzf archive.tgz archive
 	rm -fr archive
 
@@ -52,7 +52,8 @@ leaks: test
 clang: 
 	cp ../materials/linters/.clang-format ./
 	clang-format -style=Google -n Model/* Controller/*
-	clang-format -style=Google -n View/*.cc View/*.h
+	clang-format -style=Google -n View/*.ccp View/*.h
+	clang-format -style=Google -n controller/*.h 
 	rm -fr .clang-format
 
 clean:

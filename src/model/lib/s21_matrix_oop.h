@@ -60,5 +60,5 @@ class S21Matrix {
   void Copy(const S21Matrix &other);
   S21Matrix MinorMatrix(int row, int col) const;
 };
-}  //  namespace
+}  // namespace s21
 #endif  // S21_MATRIX_OOP_H_
