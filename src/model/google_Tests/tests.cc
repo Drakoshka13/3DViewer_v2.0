@@ -1,15 +1,13 @@
 #include <gtest/gtest.h>
 
-#include "../../controller/controller.h"
+#include "../../controller/controller_viewer.h"
 
 namespace s21 {
 class Test {
  public:
-  Data data;
-  std::unique_ptr<Parser> pars;
-  Affine affine;
 
-  Test(Data& data) { pars = std::make_unique<Parser>(data); }
+
+  
 };
 }  // namespace s21
 

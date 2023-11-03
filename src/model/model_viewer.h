@@ -4,8 +4,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-
-#include "lib/s21_matrix_oop.h"
+#include <cmath>
 
 namespace s21 {
 

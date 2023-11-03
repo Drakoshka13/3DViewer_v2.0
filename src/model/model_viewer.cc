@@ -53,7 +53,7 @@ void ModelViewer::ParserLine(const std::string &str,
   std::string number;
   for (size_t i = 0; i < str.size(); i++) {
     if (i > 1 && (str[0] == 'v' || str[0] == 'f') && str[1] == ' ') {
-      if (str[i] != ' ' && str[i] != '\0' && str[i] != '\n') {
+      if (str[i] != ' ' && str[i] != '\0' && str[i] != '\n' && str[i] != '\r') {
         number += str[i];
       } else if (!number.empty()) {
         if (str[0] == 'v') {
