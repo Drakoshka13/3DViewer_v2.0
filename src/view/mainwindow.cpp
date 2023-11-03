@@ -201,38 +201,59 @@ void MainWindow::on_SpinBox_Scale_valueChanged(double arg1) {
 }
 
 void MainWindow::on_SpinBox_moveX_valueChanged(double x) {
-  controller_viewer_->ChangeX(x - ui->openGLWidget->num_last_x_move);
-  ui->openGLWidget->num_last_x_move = x;
+  //   controller_viewer_->ChangeX(x - ui->openGLWidget->num_last_x_move);
+  //   ui->openGLWidget->num_last_x_move = x;
+  //   ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
+  //   ui->openGLWidget->update();
+
+  double scaleFactor = 50.0;
+  controller_viewer_->ChangeX(x * scaleFactor -
+                              ui->openGLWidget->num_last_x_move);
+  ui->openGLWidget->num_last_x_move = x * scaleFactor;
   ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
   ui->openGLWidget->update();
 }
 
-void MainWindow::on_SpinBox_moveY_valueChanged(double arg1) {
-  controller_viewer_->ChangeY(arg1 - ui->openGLWidget->num_last_y_move);
-  ui->openGLWidget->num_last_y_move = arg1;
+void MainWindow::on_SpinBox_moveY_valueChanged(double y) {
+  //  controller_viewer_->ChangeY(y - ui->openGLWidget->num_last_y_move);
+  //  ui->openGLWidget->num_last_y_move = y;
+  //  ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
+  //  ui->openGLWidget->update();
+
+  double scaleFactor = 50.0;
+  controller_viewer_->ChangeY(y * scaleFactor -
+                              ui->openGLWidget->num_last_y_move);
+  ui->openGLWidget->num_last_y_move = y * scaleFactor;
   ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
   ui->openGLWidget->update();
 }
 
 void MainWindow::on_SpinBox_moveZ_valueChanged(double arg1) {
-  controller_viewer_->ChangeZ(arg1 - ui->openGLWidget->num_last_z_move);
-  ui->openGLWidget->num_last_z_move = arg1;
+  //  controller_viewer_->ChangeZ(arg1 - ui->openGLWidget->num_last_z_move);
+  //  ui->openGLWidget->num_last_z_move = arg1;
+  //  ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
+  //  ui->openGLWidget->update();
+
+  double scaleFactor = 50.0;
+  controller_viewer_->ChangeZ(arg1 * scaleFactor -
+                              ui->openGLWidget->num_last_z_move);
+  ui->openGLWidget->num_last_z_move = arg1 * scaleFactor;
   ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
   ui->openGLWidget->update();
 }
 
 void MainWindow::on_SpinBox_X_rot_valueChanged(int arg1) {
   if (arg1 >= 360) {
-     ui->SpinBox_X_rot->setValue(0);  // в spinBox установить значение 0
-   } else if (arg1 <= -1) {
-     ui->SpinBox_X_rot->setValue(359);
-   } else {
-      controller_viewer_->RotateOX(arg1 - ui->openGLWidget->num_last_x_rot);
-      ui->openGLWidget->num_last_x_rot = arg1;
-      QObject::connect(ui->SpinBox_X_rot, SIGNAL(valueChanged(int)), ui->dial_X_rot,
-                       SLOT(setValue(int)));
-   }
-   ui->openGLWidget->update();
+    ui->SpinBox_X_rot->setValue(0);
+  } else if (arg1 <= -1) {
+    ui->SpinBox_X_rot->setValue(359);
+  } else {
+    controller_viewer_->RotateOX(arg1 - ui->openGLWidget->num_last_x_rot);
+    ui->openGLWidget->num_last_x_rot = arg1;
+    QObject::connect(ui->SpinBox_X_rot, SIGNAL(valueChanged(int)),
+                     ui->dial_X_rot, SLOT(setValue(int)));
+  }
+  ui->openGLWidget->update();
 }
 
 void MainWindow::on_dial_X_rot_valueChanged(int value) {
@@ -242,17 +263,17 @@ void MainWindow::on_dial_X_rot_valueChanged(int value) {
 }
 
 void MainWindow::on_SpinBox_Y_rot_valueChanged(int arg1) {
-    if (arg1 >= 360) {
-       ui->SpinBox_Y_rot->setValue(0);
-     } else if (arg1 <= -1) {
-       ui->SpinBox_Y_rot->setValue(359);
-     } else {
-        controller_viewer_->RotateOY(arg1 - ui->openGLWidget->num_last_y_rot);
-        ui->openGLWidget->num_last_y_rot = arg1;
-     }
-     QObject::connect(ui->SpinBox_Y_rot, SIGNAL(valueChanged(int)), ui->dial_Y_rot,
-                      SLOT(setValue(int)));
-     ui->openGLWidget->update();
+  if (arg1 >= 360) {
+    ui->SpinBox_Y_rot->setValue(0);
+  } else if (arg1 <= -1) {
+    ui->SpinBox_Y_rot->setValue(359);
+  } else {
+    controller_viewer_->RotateOY(arg1 - ui->openGLWidget->num_last_y_rot);
+    ui->openGLWidget->num_last_y_rot = arg1;
+  }
+  QObject::connect(ui->SpinBox_Y_rot, SIGNAL(valueChanged(int)), ui->dial_Y_rot,
+                   SLOT(setValue(int)));
+  ui->openGLWidget->update();
 }
 
 void MainWindow::on_dial_Y_rot_valueChanged(int value) {
@@ -262,28 +283,17 @@ void MainWindow::on_dial_Y_rot_valueChanged(int value) {
 }
 
 void MainWindow::on_SpinBox_Z_rot_valueChanged(int arg1) {
-//  ui->SpinBox_Z_rot->setValue((360 + (arg1 % 360)) % 360);
-//  controller_viewer_->RotateOZ(arg1 - ui->openGLWidget->num_last_z_rot);
-//  ui->openGLWidget->num_last_z_rot = arg1;
-//  QObject::connect(ui->SpinBox_Z_rot, SIGNAL(valueChanged(int)), ui->dial_Z_rot,
-//                   SLOT(setValue(int)));
-//  ui->openGLWidget->SetObj().data = controller_viewer_->GetData();
-//  ui->openGLWidget->update();
-
-
-
   if (arg1 >= 360) {
     ui->SpinBox_Z_rot->setValue(0);
   } else if (arg1 <= -1) {
     ui->SpinBox_Z_rot->setValue(359);
   } else {
-      controller_viewer_->RotateOZ(arg1 - ui->openGLWidget->num_last_z_rot);
-      ui->openGLWidget->num_last_z_rot = arg1;
+    controller_viewer_->RotateOZ(arg1 - ui->openGLWidget->num_last_z_rot);
+    ui->openGLWidget->num_last_z_rot = arg1;
   }
   QObject::connect(ui->SpinBox_Z_rot, SIGNAL(valueChanged(int)), ui->dial_Z_rot,
                    SLOT(setValue(int)));
   ui->openGLWidget->update();
-
 }
 
 void MainWindow::on_dial_Z_rot_valueChanged(int value) {
@@ -342,12 +352,11 @@ void MainWindow::SaveGIF() {
     frame_->save(gif_name_);
     frame_count_ = 0;
     delete frame_;
-     delete timer_;
+    delete timer_;
     ui->pB_GIF->setEnabled(true);
     ui->pB_GIF->setText("GIF ▶");
   }
   frame_count_++;
-
 }
 
 }  // namespace s21
