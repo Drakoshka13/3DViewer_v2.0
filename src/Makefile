@@ -2,14 +2,14 @@ CC=gcc -std=c++17
 CFLAGS=-Wall -Werror -Wextra -lstdc++
 GCOV_FLAGS=-fprofile-arcs -ftest-coverage
 
-TEST_PATH=./google_Tests/*
+TEST_PATH= google_Tests/tests.cc
 
 OS = $(shell uname)
 
 ifeq ($(OS), Darwin)
 	LIBFLAGS = -lm -lgtest -lgtest_main -lstdc++
 else
-	LIBFLAGS=-lgtest -lm -lpthread -lrt -lsubunit -fprofile-arcs -ftest-coverage
+	LIBFLAGS=-lgtest -lgtest_main -lm -lpthread -fprofile-arcs -ftest-coverage -lstdc++
 endif
 
 all: clean install
@@ -26,11 +26,11 @@ uninstall:
 	rm -rf build
  
 tests: clean
-	$(CC) $(CFLAGS) $(LIBFLAGS) $(TEST_PATH) ./model/model_viewer.cc -o test
+	$(CC) $(CFLAGS) $(TEST_PATH) model/model_viewer.cc -o test $(LIBFLAGS)
 	./test
 
 gcov_report:
-	$(CC) $(TEST_PATH) ./model/model_viewer.cc  $(LIBFLAGS) $(GCOV_FLAGS) -lcheck -o test
+	$(CC) $(CFLAGS) $(TEST_PATH) ./model/model_viewer.cc $(GCOV_FLAGS) -o test $(LIBFLAGS)
 	./test
 	gcov test
 	lcov --ignore-errors mismatch -t "test" -c -d  ./  --no-external --output-file ./coverage.info
