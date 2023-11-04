@@ -23,8 +23,6 @@ class ModelViewer {
   ~ModelViewer() = default;
   void Parser(const std::string &path);
   Data &GetData() { return data_; }
-  void PrintFacets();
-  void PrintVertexes();
   void MoveX(double a);
   void MoveY(double a);
   void MoveZ(double a);
@@ -32,7 +30,6 @@ class ModelViewer {
   void RotationByOY(double angle);
   void RotationByOZ(double angle);
   void Scale(double X, double Y, double Z);
-  void FromMatrix();
 
  private:
   Data data_;

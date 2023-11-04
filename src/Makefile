@@ -2,7 +2,7 @@ CC=gcc -std=c++17
 CFLAGS=-Wall -Werror -Wextra -lstdc++
 GCOV_FLAGS=-fprofile-arcs -ftest-coverage
 
-TEST_PATH=./Google_Tests/*
+TEST_PATH=./google_Tests/*
 
 OS = $(shell uname)
 
@@ -25,12 +25,12 @@ install: uninstall
 uninstall:
 	rm -rf build
  
-test: clean
-	$(CC) $(CFLAGS) $(LIBFLAGS) $(TEST_PATH) ./Model/Model.cc -o test
+tests: clean
+	$(CC) $(CFLAGS) $(LIBFLAGS) $(TEST_PATH) ./model/model_viewer.cc -o test
 	./test
 
 gcov_report:
-	$(CC) $(TEST_PATH) ./Model/Model.cc  $(LIBFLAGS) $(GCOV_FLAGS) -lcheck -o test
+	$(CC) $(TEST_PATH) ./model/model_viewer.cc  $(LIBFLAGS) $(GCOV_FLAGS) -lcheck -o test
 	./test
 	gcov test
 	lcov --ignore-errors mismatch -t "test" -c -d  ./  --no-external --output-file ./coverage.info
