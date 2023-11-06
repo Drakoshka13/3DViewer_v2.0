@@ -2,7 +2,7 @@ CC=gcc -std=c++17
 CFLAGS=-Wall -Werror -Wextra -lstdc++
 GCOV_FLAGS=-fprofile-arcs -ftest-coverage
 
-TEST_PATH= google_Tests/tests.cc
+TEST_PATH= google_tests/tests.cc
 
 OS = $(shell uname)
 
@@ -16,7 +16,7 @@ all: clean install
 
 install: uninstall
 	mkdir build
-	cp -rf View/* build
+	cp -rf view/* build
 	cd build && qmake 3D_viewer.pro
 	make -C build
 	cd build && make clean
@@ -33,9 +33,9 @@ gcov_report:
 	$(CC) $(CFLAGS) $(TEST_PATH) ./model/model_viewer.cc $(GCOV_FLAGS) -o test $(LIBFLAGS)
 	./test
 	gcov test
-	lcov --ignore-errors mismatch -t "test" -c -d  ./  --no-external --output-file ./coverage.info
+	lcov  -t "test" -c -d  ./  --no-external --output-file ./coverage.info
 	genhtml coverage.info --output-directory ./report/
-	open ./report/index.html
+	# open ./report/index.html
 
 dvi:
 	open README_DVI.md
@@ -46,14 +46,13 @@ dist:
 	tar -cvzf archive.tgz archive
 	rm -fr archive
 
-leaks: test
-	CK_FORK=no leaks --atExit -- ./test
+leaks: 
+	CK_FORK=no valgrind --leak-check=yes --tool=memcheck ./test
 
 clang: 
 	cp ../materials/linters/.clang-format ./
-	clang-format -style=Google -n Model/* Controller/*
-	clang-format -style=Google -n View/*.ccp View/*.h
-	clang-format -style=Google -n controller/*.h 
+	clang-format -style=Google -n model/* controller/*
+	clang-format -style=Google -n view/*.cpp view/*.h
 	rm -fr .clang-format
 
 clean:
