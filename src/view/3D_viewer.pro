@@ -1,9 +1,11 @@
 QT       += core gui openglwidgets opengl
-LIBS += -lopengl32 -lglu32 -lgdi32
+#LIBS += -lopengl32 -lglu32 -lgdi32
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++17
+
+ICON = ../icon/1.png
 
 include(third_party/QtGifImage/src/gifimage/qtgifimage.pri)
 

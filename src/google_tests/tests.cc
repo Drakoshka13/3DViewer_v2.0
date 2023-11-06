@@ -22,6 +22,10 @@ TEST(viewer_tests, test_1) {
   for (int i = 0; i < 24; i++) {
     EXPECT_DOUBLE_EQ(b.GetData().vertexes[i], test_v[i]);
   }
+
+  for (int j = 0; j < 72; j++) {
+    EXPECT_DOUBLE_EQ(b.GetData().facets[j], test_f[j]);
+  }
 }
 
 TEST(viewer_tests, test_2) {
@@ -43,6 +47,10 @@ TEST(viewer_tests, test_2) {
   for (int i = 0; i < 24; i++) {
     EXPECT_DOUBLE_EQ(b.GetData().vertexes[i], test_v[i]);
   }
+
+  for (int j = 0; j < 72; j++) {
+    EXPECT_DOUBLE_EQ(b.GetData().facets[j], test_f[j]);
+  }
 }
 
 TEST(viewer_tests, MoveX) {
@@ -53,6 +61,16 @@ TEST(viewer_tests, MoveX) {
   b.ChangeY(2);
   b.ChangeZ(3);
 }
+
+TEST(viewer_tests, MoveY) {
+  s21::ModelViewer a;
+  s21::ControllerViewer b(&a);
+  b.Parser("google_tests/cube.txt");
+  b.RotateOX(1);
+  b.RotateOY(2);
+  b.RotateOZ(3);
+}
+
 
 TEST(Move, Test1) {
   double X = 2.5;
