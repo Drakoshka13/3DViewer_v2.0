@@ -14,8 +14,8 @@ include(third_party/QtGifImage/src/gifimage/qtgifimage.pri)
 SOURCES += \
     ../model/model_viewer.cc \
     main.cc \
-    mainwindow.cpp \
-    myopenglwidget.cpp
+    mainwindow.cc \
+    myopenglwidget.cc
 
 HEADERS += \
     ../controller/controller_viewer.h \
