@@ -10,7 +10,7 @@ class ControllerViewer {
   ControllerViewer(ModelViewer *model) : model_(model) {}
   ~ControllerViewer() = default;
   void Parser(const std::string &path) { model_->Parser(path); }
-  Data &GetData() { return model_->GetData(); }
+  Data GetData() { return model_->GetData(); }
 
   void ChangeScale(double a, double b, double c) { model_->Scale(a, b, c); }
   void ChangeX(double a) { model_->MoveX(a); }

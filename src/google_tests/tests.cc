@@ -6,7 +6,7 @@
 TEST(viewer_tests, test_1) {
   s21::ModelViewer a;
   s21::ControllerViewer b(&a);
-  b.Parser("google_tests/cube.obj");
+  b.Parser("google_tests/cube.txt");
 
   EXPECT_DOUBLE_EQ(b.GetData().v_count, 24);
   EXPECT_DOUBLE_EQ(b.GetData().f_count, 72);
@@ -31,10 +31,10 @@ TEST(viewer_tests, test_1) {
 TEST(viewer_tests, test_2) {
   s21::ModelViewer a;
   s21::ControllerViewer b(&a);
-  b.Parser("google_tests/cube.obj");
+  b.Parser("google_tests/cube.txt");
 
-  EXPECT_DOUBLE_EQ(b.GetData().v_count, 24);
-  EXPECT_DOUBLE_EQ(b.GetData().f_count, 72);
+  EXPECT_DOUBLE_EQ(b.GetData().v_count, 8);
+  EXPECT_DOUBLE_EQ(b.GetData().f_count, 36);
 
   float test_v[] = {1.0, -1.0,     -1.0, 1.0,  -1.0, 1.0,  -1.0,      -1.0,
                     1.0, -1.0,     -1.0, -1.0, 1.0,  1.0,  -0.999999, 0.999999,
@@ -53,22 +53,11 @@ TEST(viewer_tests, test_2) {
   }
 }
 
-// TEST(viewer_tests, MoveX) {
-//   s21::ModelViewer a;
-//   s21::ControllerViewer b(&a);
-//   b.Parser("google_tests/cube.obj");
-
-//   s21::Object obj;
-//   s21::Transform transform(&obj);
-//   obj.pushVetrexesPoint(1.0, 2.0, 3.0);
-//   obj.pushVetrexesPoint(-1.0, -2.0, -3.0);
-//   transform.moveX(2.0);
-//   const auto& vertexes = obj.getPoints()->vertexes_;
-//   EXPECT_DOUBLE_EQ(vertexes[0], 3.0);
-//   EXPECT_DOUBLE_EQ(vertexes[1], 2.0);
-//   EXPECT_DOUBLE_EQ(vertexes[2], 3.0);
-//   EXPECT_DOUBLE_EQ(vertexes[3], 1.0);
-//   EXPECT_DOUBLE_EQ(vertexes[4], -2.0);
-//   EXPECT_DOUBLE_EQ(vertexes[5], -3.0);
-// }
-
+TEST(viewer_tests, MoveX) {
+  s21::ModelViewer a;
+  s21::ControllerViewer b(&a);
+  b.Parser("google_tests/cube.tx");
+  b.ChangeX(1);
+  b.ChangeY(2);
+  b.ChangeZ(3);
+}

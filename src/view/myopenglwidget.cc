@@ -52,20 +52,17 @@ void MyOpenGLWidget::PaintObj() {
     glLineWidth(obj.size_l);
     glPointSize(obj.size_p);
     glVertexPointer(3, GL_FLOAT, 0, &obj.data.vertexes[0]);
-
     glColor3d(obj.line_color_.redF(), obj.line_color_.greenF(),
               obj.line_color_.blueF());
-
     glEnableClientState(GL_VERTEX_ARRAY);
     if (obj.disable_line == false) {
       glDrawElements(GL_LINES, obj.data.f_count, GL_UNSIGNED_INT,
                      &obj.data.facets[0]);
     }
-
     glColor3d(obj.vertex_color_.redF(), obj.vertex_color_.greenF(),
               obj.vertex_color_.blueF());
 
-    if (obj.disable_p == false) {
+    if (obj.disable_points == false) {
       glDrawArrays(GL_POINTS, 0, obj.data.v_count / 3);
     }
     glDisableClientState(GL_VERTEX_ARRAY);
