@@ -22,7 +22,7 @@ class ModelViewer {
   ModelViewer() = default;
   ~ModelViewer() = default;
   void Parser(const std::string &path);
-  Data GetData() { return data_; }
+  Data &GetData() { return data_; }
   void MoveX(double a);
   void MoveY(double a);
   void MoveZ(double a);
