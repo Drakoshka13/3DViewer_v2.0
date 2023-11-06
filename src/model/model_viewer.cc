@@ -65,6 +65,9 @@ void ModelViewer::ParserLine(const std::string &str,
           } else if (i % 3 == 2) {
             MaxMin(data_, 2);
           }
+          if (data_.max_coord < data_.vertexes.back()) {
+            data_.max_coord = data_.vertexes.back();
+          }
         } else if (str[0] == 'f') {
           if (number.find('/') == std::string::npos) {
             elements.push_back(number);

@@ -53,6 +53,7 @@ clang:
 	cp ../materials/linters/.clang-format ./
 	clang-format -style=Google -n model/* controller/*
 	clang-format -style=Google -n view/*.cc view/*.h
+	clang-format -style=Google -n google_tests/*.cc
 	rm -fr .clang-format
 
 clean:

@@ -1,10 +1,10 @@
 #ifndef CPP4_3DVIEWER_V2_0_2_MODEL_H_
 #define CPP4_3DVIEWER_V2_0_2_MODEL_H_
 
+#include <cmath>
 #include <fstream>
 #include <string>
 #include <vector>
-#include <cmath>
 
 namespace s21 {
 
@@ -22,7 +22,7 @@ class ModelViewer {
   ModelViewer() = default;
   ~ModelViewer() = default;
   void Parser(const std::string &path);
-  Data &GetData() { return data_; }
+  Data GetData() { return data_; }
   void MoveX(double a);
   void MoveY(double a);
   void MoveZ(double a);
