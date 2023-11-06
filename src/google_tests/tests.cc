@@ -71,7 +71,6 @@ TEST(viewer_tests, MoveY) {
   b.RotateOZ(3);
 }
 
-
 TEST(Move, Test1) {
   double X = 2.5;
   double Y = -1;
@@ -110,5 +109,3 @@ TEST(Scale, Test1) {
   a.Scale(X, Y, Z);
   EXPECT_TRUE(a.GetData().vertexes == result);
 }
-
-

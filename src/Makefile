@@ -33,7 +33,7 @@ gcov_report:
 	$(CC) $(CFLAGS) $(TEST_PATH) ./model/model_viewer.cc $(GCOV_FLAGS) -o test $(LIBFLAGS)
 	./test
 	gcov test
-	lcov  -t "test" -c -d  ./  --no-external --output-file ./coverage.info
+	lcov --ignore-errors mismatch -t "test" -c -d  ./  --no-external --output-file ./coverage.info
 	genhtml coverage.info --output-directory ./report/
 	# open ./report/index.html
 
