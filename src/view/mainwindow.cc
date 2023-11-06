@@ -22,21 +22,21 @@ void MainWindow::on_open_file_clicked() {
       "Файлы OBJ (*.obj)");
   if (fileDialog != "") {
     controller_viewer_->Parser(fileDialog.toStdString());
-      if(controller_viewer_->GetData().v_count > 0){
-        ui->spin_box_move_x->setValue(0.0);
-        ui->spin_box_move_y->setValue(0.0);
-        ui->spin_box_move_z->setValue(0.0);
-        ui->spin_box_x_rot->setValue(0.0);
-        ui->spin_box_y_rot->setValue(0.0);
-        ui->spin_box_z_rot->setValue(0.0);
-        ui->spin_box_scale->setValue(1.0);
-        ui->open_gl_widget->SetObj().data = controller_viewer_->GetData();
-        ui->name_file->setText(QFileInfo(fileDialog).fileName());
-        ui->path_file->setText(QFileInfo(fileDialog).filePath());
-        ui->num_of_vertices->setText(
-            QString::number(controller_viewer_->GetData().v_count/3));
-        ui->num_of_edges->setText(
-            QString::number(controller_viewer_->GetData().f_count/2));
+    if (controller_viewer_->GetData().v_count > 0) {
+      ui->spin_box_move_x->setValue(0.0);
+      ui->spin_box_move_y->setValue(0.0);
+      ui->spin_box_move_z->setValue(0.0);
+      ui->spin_box_x_rot->setValue(0.0);
+      ui->spin_box_y_rot->setValue(0.0);
+      ui->spin_box_z_rot->setValue(0.0);
+      ui->spin_box_scale->setValue(1.0);
+      ui->open_gl_widget->SetObj().data = controller_viewer_->GetData();
+      ui->name_file->setText(QFileInfo(fileDialog).fileName());
+      ui->path_file->setText(QFileInfo(fileDialog).filePath());
+      ui->num_of_vertices->setText(
+          QString::number(controller_viewer_->GetData().v_count / 3));
+      ui->num_of_edges->setText(
+          QString::number(controller_viewer_->GetData().f_count / 2));
     }
   }
 }
@@ -144,7 +144,8 @@ void MainWindow::on_save_clicked() {
   settings.setValue("central", ui->open_gl_widget->GetObj().central);
   settings.setValue("dash", ui->open_gl_widget->GetObj().dash);
   settings.setValue("disable_line", ui->open_gl_widget->GetObj().disable_line);
-  settings.setValue("disable_points", ui->open_gl_widget->GetObj().disable_points);
+  settings.setValue("disable_points",
+                    ui->open_gl_widget->GetObj().disable_points);
   settings.setValue("circle", ui->open_gl_widget->GetObj().circle);
   settings.setValue("size_l", ui->open_gl_widget->GetObj().size_l);
   settings.setValue("size_p", ui->open_gl_widget->GetObj().size_p);
@@ -176,7 +177,8 @@ void MainWindow::on_load_clicked() {
     ui->line->setChecked(true);
   }
 
-  ui->open_gl_widget->SetObj().circle = settings.value("circle", false).toBool();
+  ui->open_gl_widget->SetObj().circle =
+      settings.value("circle", false).toBool();
   ui->open_gl_widget->SetObj().disable_points =
       settings.value("disable_points", false).toBool();
   if (ui->open_gl_widget->GetObj().circle == true) {
@@ -187,9 +189,11 @@ void MainWindow::on_load_clicked() {
     ui->square->setChecked(true);
   }
 
-  ui->open_gl_widget->SetObj().size_l = settings.value("size_l", 0.0).toDouble();
+  ui->open_gl_widget->SetObj().size_l =
+      settings.value("size_l", 0.0).toDouble();
   ui->size_l->setValue(ui->open_gl_widget->GetObj().size_l);
-  ui->open_gl_widget->SetObj().size_p = settings.value("size_p", 0.0).toDouble();
+  ui->open_gl_widget->SetObj().size_p =
+      settings.value("size_p", 0.0).toDouble();
   ui->size_p->setValue(ui->open_gl_widget->GetObj().size_p);
 
   ui->open_gl_widget->SetObj().main_color_ =
@@ -211,7 +215,8 @@ void MainWindow::on_spin_box_scale_valueChanged(double arg1) {
 
 void MainWindow::on_spin_box_move_x_valueChanged(double x) {
   double scale_factor = x - ui->open_gl_widget->num_last_x_move;
-  controller_viewer_->ChangeX(scale_factor*ui->open_gl_widget->GetObj().data.max_coord);
+  controller_viewer_->ChangeX(scale_factor *
+                              ui->open_gl_widget->GetObj().data.max_coord);
   ui->open_gl_widget->num_last_x_move = x;
   ui->open_gl_widget->SetObj().data = controller_viewer_->GetData();
   ui->open_gl_widget->update();
@@ -219,7 +224,8 @@ void MainWindow::on_spin_box_move_x_valueChanged(double x) {
 
 void MainWindow::on_spin_box_move_y_valueChanged(double y) {
   double scale_factor = y - ui->open_gl_widget->num_last_y_move;
-  controller_viewer_->ChangeY(scale_factor*ui->open_gl_widget->GetObj().data.max_coord);
+  controller_viewer_->ChangeY(scale_factor *
+                              ui->open_gl_widget->GetObj().data.max_coord);
   ui->open_gl_widget->num_last_y_move = y;
   ui->open_gl_widget->SetObj().data = controller_viewer_->GetData();
   ui->open_gl_widget->update();
@@ -227,7 +233,8 @@ void MainWindow::on_spin_box_move_y_valueChanged(double y) {
 
 void MainWindow::on_spin_box_move_z_valueChanged(double z) {
   double scale_factor = z - ui->open_gl_widget->num_last_z_move;
-  controller_viewer_->ChangeZ(scale_factor*ui->open_gl_widget->GetObj().data.max_coord);
+  controller_viewer_->ChangeZ(scale_factor *
+                              ui->open_gl_widget->GetObj().data.max_coord);
   ui->open_gl_widget->num_last_z_move = z;
   ui->open_gl_widget->SetObj().data = controller_viewer_->GetData();
   ui->open_gl_widget->update();
@@ -249,8 +256,8 @@ void MainWindow::on_spin_box_x_rot_valueChanged(int arg1) {
 
 void MainWindow::on_dial_x_rot_valueChanged(int value) {
   ui->open_gl_widget->xRot = value;
-  QObject::connect(ui->dial_x_rot, SIGNAL(valueChanged(int)), ui->spin_box_x_rot,
-                   SLOT(setValue(int)));
+  QObject::connect(ui->dial_x_rot, SIGNAL(valueChanged(int)),
+                   ui->spin_box_x_rot, SLOT(setValue(int)));
 }
 
 void MainWindow::on_spin_box_y_rot_valueChanged(int arg1) {
@@ -262,15 +269,15 @@ void MainWindow::on_spin_box_y_rot_valueChanged(int arg1) {
     controller_viewer_->RotateOY(arg1 - ui->open_gl_widget->num_last_y_rot);
     ui->open_gl_widget->num_last_y_rot = arg1;
   }
-  QObject::connect(ui->spin_box_y_rot, SIGNAL(valueChanged(int)), ui->dial_y_rot,
-                   SLOT(setValue(int)));
+  QObject::connect(ui->spin_box_y_rot, SIGNAL(valueChanged(int)),
+                   ui->dial_y_rot, SLOT(setValue(int)));
   ui->open_gl_widget->update();
 }
 
 void MainWindow::on_dial_y_rot_valueChanged(int value) {
   ui->open_gl_widget->yRot = value;
-  QObject::connect(ui->dial_y_rot, SIGNAL(valueChanged(int)), ui->spin_box_y_rot,
-                   SLOT(setValue(int)));
+  QObject::connect(ui->dial_y_rot, SIGNAL(valueChanged(int)),
+                   ui->spin_box_y_rot, SLOT(setValue(int)));
 }
 
 void MainWindow::on_spin_box_z_rot_valueChanged(int arg1) {
@@ -282,15 +289,15 @@ void MainWindow::on_spin_box_z_rot_valueChanged(int arg1) {
     controller_viewer_->RotateOZ(arg1 - ui->open_gl_widget->num_last_z_rot);
     ui->open_gl_widget->num_last_z_rot = arg1;
   }
-  QObject::connect(ui->spin_box_z_rot, SIGNAL(valueChanged(int)), ui->dial_z_rot,
-                   SLOT(setValue(int)));
+  QObject::connect(ui->spin_box_z_rot, SIGNAL(valueChanged(int)),
+                   ui->dial_z_rot, SLOT(setValue(int)));
   ui->open_gl_widget->update();
 }
 
 void MainWindow::on_dial_z_rot_valueChanged(int value) {
   ui->open_gl_widget->zRot = value;
-  QObject::connect(ui->dial_z_rot, SIGNAL(valueChanged(int)), ui->spin_box_z_rot,
-                   SLOT(setValue(int)));
+  QObject::connect(ui->dial_z_rot, SIGNAL(valueChanged(int)),
+                   ui->spin_box_z_rot, SLOT(setValue(int)));
 }
 
 void MainWindow::on_exit_program_clicked() { QApplication::quit(); }

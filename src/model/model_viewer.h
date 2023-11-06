@@ -1,10 +1,10 @@
 #ifndef CPP4_3DVIEWER_V2_0_2_MODEL_H_
 #define CPP4_3DVIEWER_V2_0_2_MODEL_H_
 
+#include <cmath>
 #include <fstream>
 #include <string>
 #include <vector>
-#include <cmath>
 
 namespace s21 {
 

@@ -33,8 +33,8 @@ TEST(viewer_tests, test_2) {
   s21::ControllerViewer b(&a);
   b.Parser("google_tests/cube.txt");
 
-  EXPECT_DOUBLE_EQ(b.GetData().v_count, 8);
-  EXPECT_DOUBLE_EQ(b.GetData().f_count, 36);
+  EXPECT_DOUBLE_EQ(b.GetData().v_count, 24);
+  EXPECT_DOUBLE_EQ(b.GetData().f_count, 72);
 
   float test_v[] = {1.0, -1.0,     -1.0, 1.0,  -1.0, 1.0,  -1.0,      -1.0,
                     1.0, -1.0,     -1.0, -1.0, 1.0,  1.0,  -0.999999, 0.999999,
@@ -56,8 +56,17 @@ TEST(viewer_tests, test_2) {
 TEST(viewer_tests, MoveX) {
   s21::ModelViewer a;
   s21::ControllerViewer b(&a);
-  b.Parser("google_tests/cube.tx");
+  b.Parser("google_tests/cube.txt");
   b.ChangeX(1);
   b.ChangeY(2);
   b.ChangeZ(3);
+}
+
+TEST(viewer_tests, MoveY) {
+  s21::ModelViewer a;
+  s21::ControllerViewer b(&a);
+  b.Parser("google_tests/cube.txt");
+  b.RotateOX(1);
+  b.RotateOY(2);
+  b.RotateOZ(3);
 }
